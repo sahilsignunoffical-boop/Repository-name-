@@ -88,10 +88,21 @@ function getGroupCache(groupId) {
     }
     return configCache.get(groupId);
 }
-
 const waClient = new WAClient({
     authStrategy: new LocalAuth(),
-    puppeteer: { args: ['--no-sandbox', '--disable-setuid-sandbox'] }
+    puppeteer: {
+        headless: true,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--no-first-run',
+            '--no-zygote',
+            '--single-process',
+            '--disable-gpu'
+        ]
+    }
 });
 waClient.on('qr', (qr) => { qrcode.generate(qr, { small: true }); });
 waClient.on('ready', () => console.log('📱 WhatsApp Network Gateway: Connected!'));
