@@ -257,7 +257,7 @@ async function handleIncomingCommand(context) {
         if (!countryInput) return replyContext('❌ Usage: `.da [country]` (e.g., `.da india`)');
         const tz = countryTimezones[countryInput];
         if (tz) {
-            const baseSlotsUtc =;
+        const baseSlotsUtc =[5, 8, 11, 14, 17, 20, 23, 2];
             let listStr = `🏟️ *IGG EVENT LOCAL SLOTS FOR: ${countryInput.toUpperCase()}*\n\n`;
             baseSlotsUtc.forEach((hour, i) => {
                 let slot = moment.utc().hours(hour).minutes(0).seconds(0);
